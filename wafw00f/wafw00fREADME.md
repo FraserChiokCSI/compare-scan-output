@@ -5,7 +5,6 @@
 
 ### Relavent Usage
 ```
-subfinder -d  -o <output.txt>
 wafw00f -a <top-level domain (TLD)> -o <output.json>
 ```
 
