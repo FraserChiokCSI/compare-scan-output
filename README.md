@@ -10,7 +10,7 @@ The purpose of this repository is to view the individual output of scanners from
 
 ## Prerequisites
 
-- Ensure Mantis is installed.
+Ensure Mantis is installed.
 
 ## Installation
 
