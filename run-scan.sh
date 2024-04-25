@@ -29,9 +29,10 @@ fi
 process_domains_from_file() {
     local file="$1"
     while IFS= read -r domain || [ -n "$domain" ]; do
-        #run_command "nuclei -target $domain -json-export ${nuclei_dir}/${domain}_nuclei.json" "$(pwd)/nuclei-result" "${domain}_nuclei.json" "$domain"
-        #run_command "subfinder -d $domain -o $(pwd)/subfinder/${domain}_subfinder.json" "$(pwd)/subfinder"
-        run_command "wafw00f -a ${domain} -o $(pwd)/wafw00f-/${domain}_wafw00f.json" "$(pwd)/waw00f"
+        run_command "subfinder -d $domain -o $(pwd)/subfinder/${domain}_subfinder.json" "$(pwd)/subfinder"
+        run_command "wafw00f -a ${domain} -o $(pwd)/wafw00f/${domain}_wafw00f.json" "$(pwd)/waw00f"
+        run_command "python3 /usr/bin/Corsy/corsy.py -u ${domain} -o $(pwd)/corsy/${domain}_corsy.json -d 1" "$(pwd)/corsy"
+        run_command "naabu -host ${domain} -json -o $(pwd)/naabu/${domain}_naabu.json —passive" "$(pwd)/naabu"
     done < "$file"
 }
 
@@ -47,9 +48,10 @@ if [ "$1" == "-f" ]; then
 else
     # Process domains from command line arguments
     for domain in "$@"; do
-        #run_command "nuclei -target $domain -json-export ${nuclei_dir}/${domain}_nuclei.json" "$(pwd)/nuclei-result" "${domain}_nuclei.json" "$domain"
         run_command "subfinder -d $domain -o $(pwd)/subfinder/${domain}_subfinder.json" "$(pwd)/subfinder"
         run_command "wafw00f -a ${domain} -o $(pwd)/wafw00f/${domain}_wafw00f.json" "$(pwd)/waw00f"
+        run_command "python3 /usr/bin/Corsy/corsy.py -u ${domain} -o $(pwd)/corsy/${domain}_corsy.json -d 1" "$(pwd)/corsy"
+        run_command "naabu -host ${domain} -json -o $(pwd)/naabu/${domain}_naabu.json —passive" "$(pwd)/naabu"
     done
 fi
 
