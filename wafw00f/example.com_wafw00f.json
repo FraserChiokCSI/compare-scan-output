@@ -1,0 +1,8 @@
+[
+    {
+      "url": "https://example.com",
+      "detected": true,
+      "firewall": "Generic",
+      "manufacturer": "Unknown"
+    }
+]
